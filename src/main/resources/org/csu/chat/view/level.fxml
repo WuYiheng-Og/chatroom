@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.leewyatt.rxcontrols.controls.RXTextField?>
+<?import com.leewyatt.rxcontrols.controls.RXTranslationButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="221.0" prefWidth="528.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.csu.chat.controller.LevelViewController">
+    <children>
+        <RXTextField fx:id="levelTextField" layoutX="82.0" layoutY="27.0" />
+        <RXTextField fx:id="unitSizeTextField" layoutX="345.0" layoutY="27.0" />
+        <RXTextField fx:id="sceneLengthTextField" layoutX="344.0" layoutY="73.0" />
+        <RXTextField fx:id="sceneWidthTextField" layoutX="83.0" layoutY="73.0" />
+        <RXTextField fx:id="colCountTextField" layoutX="345.0" layoutY="117.0" />
+        <RXTextField fx:id="rowCountTextField" layoutX="84.0" layoutY="117.0" />
+        <Label layoutX="18.0" layoutY="30.0" text="难度级别：" />
+        <Label layoutX="20.0" layoutY="77.0" text="场景宽度：" />
+        <Label layoutX="266.0" layoutY="31.0" text="单元格大小：" />
+        <Label layoutX="280.0" layoutY="77.0" prefHeight="15.0" prefWidth="60.0" text="场景长度：" />
+        <Label layoutX="44.0" layoutY="120.0" text="行数：" />
+        <Label layoutX="304.0" layoutY="120.0" text="列数：" />
+        <RXTranslationButton fx:id="submitButton" layoutX="265.0" layoutY="157.0" onAction="#submitGameLevel" prefHeight="40.0" prefWidth="115.0" style="-fx-background-radius: 15; -fx-background-color: #FF9900;" text="确定" translationDir="TOP_TO_BOTTOM">
+            <graphic>
+                <ImageView fitHeight="26.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
+                    <Image url="@../images/login.png" />
+                </ImageView>
+            </graphic>
+            <effect>
+                <DropShadow height="10.0" radius="4.5" width="10.0" />
+            </effect>
+            <font>
+                <Font name="YouYuan" size="18.0" />
+            </font>
+        </RXTranslationButton>
+        <RXTranslationButton fx:id="cancelButton" layoutX="390.0" layoutY="157.0" onAction="#cancel" prefHeight="40.0" prefWidth="115.0" style="-fx-background-radius: 15; -fx-background-color: #66CCFF;" text="返回" translationDir="BOTTOM_TO_TOP">
+            <graphic>
+                <ImageView fitHeight="26.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
+                    <Image url="@../images/login.png" />
+                </ImageView>
+            </graphic>
+            <effect>
+                <DropShadow height="10.0" radius="4.5" width="10.0" />
+            </effect>
+            <font>
+                <Font name="YouYuan" size="18.0" />
+            </font>
+        </RXTranslationButton>
+    </children>
+</AnchorPane>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.csu.linkgame.mapper.LogMapper">
+
+    <resultMap id="BaseResultMap" type="org.csu.chat.domain.Log">
+            <id property="logId" column="log_id" jdbcType="INTEGER"/>
+            <result property="logInfo" column="log_info" jdbcType="VARCHAR"/>
+            <result property="logTime" column="log_time" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        log_id,log_info,log_time
+    </sql>
+    <select id="selectAll" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from log
+    </select>
+    <delete id="deleteByLogIdIn">
+        delete from log
+        where
+        log_id in
+        <foreach collection="logIdList" item="item" open="(" close=")" separator=",">
+            #{item,jdbcType=NUMERIC}
+        </foreach>
+    </delete>
+    <select id="selectByKeyword" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from log
+        where
+        CONCAT(log_info,log_time) LIKE CONCAT ('%',#{keyword},'%')
+    </select>
+    <insert id="insertAll">
+        insert into log
+            (log_id, log_info, log_time)
+        values (#{logId,jdbcType=NUMERIC}, #{logInfo,jdbcType=VARCHAR}, #{logTime,jdbcType=TIMESTAMP})
+
+    </insert>
+</mapper>

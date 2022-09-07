@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.leewyatt.rxcontrols.controls.RXAudioSpectrum?>
+<?import com.leewyatt.rxcontrols.controls.RXLrcView?>
+<?import com.leewyatt.rxcontrols.controls.RXMediaProgressBar?>
+<?import com.leewyatt.rxcontrols.controls.RXToggleButton?>
+<?import com.leewyatt.rxcontrols.controls.RXTranslationButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+
+<AnchorPane prefHeight="670.0" prefWidth="517.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.csu.chat.controller.MusicViewController">
+   <ImageView fitHeight="893.0" fitWidth="543.0" layoutY="-199.0" pickOnBounds="true" preserveRatio="true" style="-fx-blend-mode: scratch;">
+      <image>
+         <Image url="@../images/music_bg4.jpg" />
+      </image>
+   </ImageView>
+    <RXTranslationButton id="openFileButton" layoutX="23.0" layoutY="29.0" onAction="#openFileAction" prefHeight="36.0" prefWidth="186.0" text="Open Mp3 File">
+        <graphic>
+            <ImageView fitHeight="25.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                <image>
+                    <Image url="@../images/open_file.png" />
+                </image>
+            </ImageView>
+        </graphic>
+    </RXTranslationButton>
+    <RXLrcView fx:id="lrcPane" layoutX="5.0" layoutY="95.0" prefHeight="289.0" prefWidth="500.0" styleClass="lrcPane" />
+    <RXAudioSpectrum fx:id="spectrum" layoutX="4.0" layoutY="421.0" prefHeight="81.0" prefWidth="500.0" styleClass="spectrum" />
+    <RXMediaProgressBar fx:id="progressBar" layoutX="18.0" layoutY="542.0" prefHeight="12.0" prefWidth="479.0" />
+    <HBox alignment="CENTER" layoutY="596.0" prefHeight="23.0" prefWidth="517.0" spacing="5.0">
+        <children>
+            <RXToggleButton selected="true" text="默认">
+                <toggleGroup>
+                    <ToggleGroup fx:id="styleGroup" />
+                </toggleGroup>
+            </RXToggleButton>
+            <RXToggleButton text="样式1" toggleGroup="$styleGroup" />
+            <RXToggleButton text="样式2" toggleGroup="$styleGroup" />
+            <RXToggleButton text="样式3" toggleGroup="$styleGroup" />
+            <RXToggleButton text="样式4" toggleGroup="$styleGroup" />
+            <RXToggleButton text="样式5" toggleGroup="$styleGroup" />
+            <RXToggleButton text="样式6" toggleGroup="$styleGroup" />
+        </children>
+        <padding>
+            <Insets left="5.0" right="5.0" />
+        </padding>
+    </HBox>
+   <RXToggleButton fx:id="musicToggleButton" layoutX="238.0" layoutY="510.0" onAction="#changeMusicStart" text="播放" />
+</AnchorPane>

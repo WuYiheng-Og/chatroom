@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.csu.linkgame.mapper.GameHistoryMapper">
+
+    <resultMap id="BaseResultMap" type="org.csu.chat.domain.GameHistory">
+            <id property="gameHistoryId" column="game_history_id" jdbcType="INTEGER"/>
+            <result property="endTime" column="end_time" jdbcType="TIMESTAMP"/>
+            <result property="winner" column="winner" jdbcType="VARCHAR"/>
+            <result property="loser" column="loser" jdbcType="VARCHAR"/>
+            <result property="gameLevel" column="game_level" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        game_history_id,end_time,winner,
+        loser,game_level
+    </sql>
+    <select id="selectALl" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from game_history
+    </select>
+    <delete id="deleteByGameHistoryIdIn">
+        delete from game_history
+        where
+        game_history_id in
+        <foreach collection="gameHistoryIdList" item="item" open="(" close=")" separator=",">
+            #{item,jdbcType=NUMERIC}
+        </foreach>
+    </delete>
+
+    <select id="selectByKeyword" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from game_history
+        where
+        CONCAT(end_time,winner,loser,game_level) LIKE CONCAT ('%',#{keyword},'%')
+    </select>
+</mapper>

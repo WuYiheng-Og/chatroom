@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.csu.linkgame.mapper.GameLevelMapper">
+
+    <resultMap id="BaseResultMap" type="org.csu.chat.domain.GameLevel">
+            <id property="level" column="level" jdbcType="INTEGER"/>
+            <result property="unitSize" column="unit_size" jdbcType="INTEGER"/>
+            <result property="sceneWidth" column="scene_width" jdbcType="INTEGER"/>
+            <result property="sceneLength" column="scene_length" jdbcType="INTEGER"/>
+            <result property="rowCount" column="row_count" jdbcType="INTEGER"/>
+            <result property="colCount" column="col_count" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        level,unit_size,scene_width,
+        scene_length,row_count,col_count
+    </sql>
+    <select id="selectAll" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from game_level
+    </select>
+    <delete id="deleteByLevelIn">
+        delete from game_level
+        where
+        level in
+        <foreach collection="levelList" item="item" open="(" close=")" separator=",">
+            #{item,jdbcType=NUMERIC}
+        </foreach>
+    </delete>
+    <select id="selectByKeyword" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from game_level
+        where
+        CONCAT(level,unit_size,scene_width,scene_length,row_count,col_count) LIKE CONCAT ('%',#{keyword},'%')
+    </select>
+    <insert id="insertAll">
+        insert into game_level
+        (level, unit_size, scene_width,
+         scene_length, row_count, col_count)
+        values (#{level,jdbcType=NUMERIC}, #{unitSize,jdbcType=NUMERIC}, #{sceneWidth,jdbcType=NUMERIC},
+                #{sceneLength,jdbcType=NUMERIC}, #{rowCount,jdbcType=NUMERIC}, #{colCount,jdbcType=NUMERIC})
+
+    </insert>
+    <update id="updateSelective">
+        update game_level
+        <set>
+            <if test="unitSize != null">unit_size=#{unitSize,jdbcType=NUMERIC},</if>
+            <if test="sceneWidth != null">scene_width=#{sceneWidth,jdbcType=NUMERIC},</if>
+            <if test="sceneLength != null">scene_length=#{sceneLength,jdbcType=NUMERIC},</if>
+            <if test="rowCount != null">row_count=#{rowCount,jdbcType=NUMERIC},</if>
+            <if test="colCount != null">col_count=#{colCount,jdbcType=NUMERIC},</if>
+        </set>
+        where level = #{level,jdbcType=NUMERIC}
+    </update>
+    <select id="selectAllByLevel" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from game_level
+        where
+        level = #{level,jdbcType=NUMERIC}
+    </select>
+</mapper>

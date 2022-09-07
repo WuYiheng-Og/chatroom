@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.csu.linkgame.mapper.UserMapper">
+
+    <resultMap id="BaseResultMap" type="org.csu.chat.domain.User">
+            <id property="username" column="username" jdbcType="VARCHAR"/>
+            <result property="password" column="password" jdbcType="VARCHAR"/>
+            <result property="nickname" column="nickname" jdbcType="VARCHAR"/>
+            <result property="isAdmin" column="is_admin" jdbcType="INTEGER"/>
+            <result property="userRank" column="user_rank" jdbcType="VARCHAR"/>
+            <result property="userGoal" column="user_goal" jdbcType="VARCHAR"/>
+            <result property="userPort" column="user_port" jdbcType="VARCHAR"/>
+            <result property="userFriend" column="user_friend" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        username,password,nickname,
+        is_admin,user_rank,user_goal,
+        user_port,user_friend
+    </sql>
+    <select id="selectAllByUsernameAndPassword" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from user
+        where
+        username = #{username,jdbcType=VARCHAR}
+        AND password = #{password,jdbcType=VARCHAR}
+    </select>
+    <insert id="insertSelective">
+        insert into user
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="username != null">username,</if>
+            <if test="password != null">password,</if>
+            <if test="nickname != null">nickname,</if>
+            <if test="isAdmin != null">is_admin,</if>
+            <if test="userRank != null">user_rank,</if>
+            <if test="userGoal != null">user_goal,</if>
+            <if test="userPort != null">user_port,</if>
+            <if test="userFriend != null">user_friend,</if>
+        </trim>
+        values
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="username != null">#{username,jdbcType=VARCHAR},</if>
+            <if test="password != null">#{password,jdbcType=VARCHAR},</if>
+            <if test="nickname != null">#{nickname,jdbcType=VARCHAR},</if>
+            <if test="isAdmin != null">#{isAdmin,jdbcType=INTEGER},</if>
+            <if test="userRank != null">#{userRank,jdbcType=VARCHAR},</if>
+            <if test="userGoal != null">#{userGoal,jdbcType=VARCHAR},</if>
+            <if test="userPort != null">#{userPort,jdbcType=VARCHAR},</if>
+            <if test="userFriend != null">#{userFriend,jdbcType=VARCHAR},</if>
+        </trim>
+    </insert>
+    <select id="selectAllByUsername" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from user
+        where
+        username = #{username,jdbcType=VARCHAR}
+    </select>
+    <select id="selectALl" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from user
+    </select>
+    <delete id="deleteByUsernameIn">
+        delete from user
+        where
+        username in
+        <foreach collection="usernameList" item="item" open="(" close=")" separator=",">
+            #{item,jdbcType=VARCHAR}
+        </foreach>
+    </delete>
+    <select id="selectByKeyword" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from user
+        where
+        CONCAT(username,nickname,is_admin,user_rank,user_goal,user_port,user_friend) LIKE CONCAT ('%',#{keyword},'%')
+    </select>
+    <insert id="insertAll">
+        insert into user
+        (username, password, nickname,
+         is_admin, user_rank, user_goal,
+         user_port, user_friend)
+        values (#{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{nickname,jdbcType=VARCHAR},
+                #{isAdmin,jdbcType=NUMERIC}, #{userRank,jdbcType=VARCHAR}, #{userGoal,jdbcType=VARCHAR},
+                #{userPort,jdbcType=VARCHAR}, #{userFriend,jdbcType=VARCHAR})
+
+    </insert>
+    <update id="updateSelective">
+        update user
+        <set>
+            <if test="password != null">password=#{password,jdbcType=VARCHAR},</if>
+            <if test="nickname != null">nickname=#{nickname,jdbcType=VARCHAR},</if>
+            <if test="isAdmin != null">is_admin=#{isAdmin,jdbcType=NUMERIC},</if>
+            <if test="userRank != null">user_rank=#{userRank,jdbcType=VARCHAR},</if>
+            <if test="userGoal != null">user_goal=#{userGoal,jdbcType=VARCHAR},</if>
+            <if test="userPort != null">user_port=#{userPort,jdbcType=VARCHAR},</if>
+            <if test="userFriend != null">user_friend=#{userFriend,jdbcType=VARCHAR},</if>
+        </set>
+        where username = #{username,jdbcType=VARCHAR}
+    </update>
+</mapper>
