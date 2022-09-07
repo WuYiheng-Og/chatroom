@@ -9,10 +9,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>org.csu</groupId>
-    <artifactId>link-game</artifactId>
+    <artifactId>chat-room</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>link-game</name>
-    <description>link-game</description>
+    <name>chat-room</name>
+    <description>chat-room</description>
     <properties>
         <java.version>1.8</java.version>
     </properties>
