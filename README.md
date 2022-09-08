@@ -16,4 +16,5 @@ This is a chatroom Based on JavaFx，it can be used to group chat and personal c
 > 语音条播放：https://blog.csdn.net/m0_46521785/article/details/115322320
 > websocket通信：https://blog.csdn.net/weixin_56995925/article/details/120646086
 > 语音播放动图：https://blog.csdn.net/qq_43515054/article/details/120473566
+> 聊天室ui界面参考：https://blog.csdn.net/Listening_Rift/article/details/105309990
 
